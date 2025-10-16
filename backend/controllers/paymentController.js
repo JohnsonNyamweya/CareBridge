@@ -18,6 +18,8 @@ const initiateStkPush = async (req, res) => {
       `${process.env.MPESA_SHORTCODE}${process.env.MPESA_PASSKEY}${timestamp}`
     ).toString("base64");
 
+    const normalizedPhone = phone.startsWith("254") ? phone : `254${phone.substring(1)}`;
+
     const response = await axios.post(
       "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
       {
